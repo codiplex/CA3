@@ -1,8 +1,20 @@
-FROM python 3.10
-ENV USERNAME=shayan
-RUN mkidr/app
-COPY ./app
+FROM python:3.10
+ENV USERNAME=codiplex
+
+# Create the /app directory
+RUN mkdir -p /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Expose port 5000
 EXPOSE 5000
+
+# Set the working directory to /app
 WORKDIR /app
+
+# Run any necessary installation commands
 RUN make install
+
+# Define the command to run the application
 CMD ["python3", "task.py"]
